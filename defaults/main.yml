@@ -1,0 +1,23 @@
+---
+icingaweb2_unix_group: www-data
+icingaweb2_modules:
+  - doc
+  - monitoring
+
+icingaweb2_show_stacktraces: false
+icingaweb2_config_backend: ini
+icingaweb2_module_path: /usr/share/icingaweb2/modules
+icingaweb2_log: syslog
+icingaweb2_log_level: WARNING
+icingaweb2_log_application: icingaweb2
+icingaweb2_log_facility: user
+icingaweb2_theme: Icinga
+icingaweb2_theme_disabled: false
+
+icingaweb2_configure_postgres: true
+icingaweb2_postgres_grant_ido: true
+icingaweb2_postgres_login_host: localhost
+icingaweb2_postgres_login_user: postgres
+icingaweb2_postgres_user: icingaweb2
+icingaweb2_postgres_database: icingaweb2
+icingaweb2_postgres_ido_name: icinga2

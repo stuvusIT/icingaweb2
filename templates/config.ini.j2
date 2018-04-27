@@ -1,0 +1,37 @@
+; {{ ansible_managed }}
+
+[global]
+show_stacktraces = "{{ icingaweb2_show_stacktraces | int }}"
+config_backend = "{{ icingaweb2_config_backend }}"
+{% if icingaweb2_config_backend == 'db' %}
+config_resource = "{{ icingaweb2_config_resource | mandatory }}"
+{% endif %}
+module_path = "{{ icingaweb2_module_path }}"
+
+[logging]
+log = "{{ icingaweb2_log }}"
+level = "{{ icingaweb2_log_level }}"
+{% if icingaweb2_log == 'file' %}
+file = "{{ icingaweb2_log_file | mandatory }}"
+{% endif %}
+application = "{{ icingaweb2_log_application }}"
+facility = "{{ icingaweb2_log_facility }}"
+
+[themes]
+{% if ansible_date_time.month == '12' %}
+; Forced because it's winter
+default = "Winter"
+disabled = "1"
+{% elif ansible_date_time.day == '01' and ansible_date_time.month == '04' %}
+; Forced because it's the first of april
+default = "unicorn/unicorn"
+disabled = "1"
+{% else %}
+default = "{{ icingaweb2_theme }}"
+disabled = "{{ icingaweb2_theme_disabled | int }}"
+{% endif %}
+
+{% if icingaweb2_default_domain is defined %}
+[authentication]
+default_domain = "{{ icingaweb2_default_domain }}"
+{% endif %}

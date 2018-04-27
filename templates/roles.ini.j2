@@ -1,0 +1,25 @@
+; {{ ansible_managed }}
+
+{% for role in icingaweb2_roles %}
+[{{ role.name }}]
+{% if role.users is defined %}
+users = "{{ role.users | join(',') }}"
+{% endif %}
+{% if role.groups is defined %}
+groups = "{{ role.groups | join(',') }}"
+{% endif %}
+permissions = "{{ role.permissions | join(', ') }}"
+{% if role.share_users is defined %}
+application/share/users = "{{ role.share_users | join(', ') }}"
+{% endif %}
+{% if role.share_groups is defined %}
+application/share/groups = "{{ role.share_groups | join(', ') }}"
+{% endif %}
+{% if role.object_filter is defined %}
+monitoring/filter/objects = "{{ role.object_filter }}"
+{% endif %}
+{% if role.prop_blacklist is defined %}
+monitoring/blacklist/properties = "{{ role.prop_blacklist }}"
+{% endif %}
+
+{% endfor %}

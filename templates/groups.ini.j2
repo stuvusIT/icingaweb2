@@ -1,0 +1,30 @@
+; {{ ansible_managed }}
+
+{% for conf in icingaweb2_group_configs %}
+[{{ conf.name }}]
+backend = "{{ conf.backend }}"
+resource = "{{ conf.resource }}"
+
+{% if conf.backend == 'ldap' or conf.backend == 'msldap' %}
+{% if conf.user_class is defined %}
+user_class = "{{ conf.user_class }}"
+{% endif %}
+{% if conf.user_name_attribute is defined %}
+user_name_attribute = "{{ conf.user_name_attribute }}"
+{% endif %}
+{% if conf.group_class is defined %}
+group_class = "{{ conf.group_class }}"
+{% endif %}
+{% if conf.group_name_attribute is defined %}
+group_name_attribute = "{{ conf.group_name_attribute }}"
+{% endif %}
+{% if conf.group_member_attribute is defined %}
+group_member_attribute = "{{ conf.group_member_attribute }}"
+{% endif %}
+{% if conf.group_filter is defined %}
+group_filter = "{{ conf.group_filter }}"
+{% endif %}
+nested_group_search = "{{ conf.nested_group_search | default(false) | int }}"
+{% endif %}
+
+{% endfor %}

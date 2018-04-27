@@ -1,0 +1,43 @@
+---
+- name: Add Icinga APT key
+  apt_key:
+    url: https://packages.icinga.com/icinga.key
+
+- name: Add Icinga APT repository
+  apt_repository:
+    repo: deb http://packages.icinga.com/ubuntu icinga-{{ ansible_distribution_release }} main
+    filename: icinga
+    update_cache: true
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - python-psycopg2
+    - git
+    - icingaweb2
+    - icingaweb2-module-monitoring
+    - icingaweb2-module-doc
+    - php-pgsql
+    - php-imagick
+    - php-intl
+    - php-xml
+    - php-mbstring
+
+- name: Clone theme
+  git:
+    repo: https://github.com/Mikesch-mp/icingaweb2-theme-unicorn
+    dest: /usr/share/icingaweb2/modules/unicorn
+
+- name: Download background image
+  get_url:
+    url: http://i.imgur.com/SCfMd.png
+    dest: /usr/share/icingaweb2/modules/unicorn/public/img/unicorn.png
+    mode: 0644
+    owner: root
+    group: icingaweb2
+
+- import_tasks: database.yml
+  when: icingaweb2_configure_postgres
+
+- import_tasks: configuration.yml

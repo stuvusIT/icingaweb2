@@ -1,0 +1,31 @@
+; {{ ansible_managed }}
+
+{% for auth in icingaweb2_authentications %}
+[{{ auth.name }}]
+backend = "{{ auth.backend }}"
+{% if auth.domain is defined %}
+domain = "{{ auth.domain }}"
+{% endif %}
+
+{% if auth.backend == 'external' and auth.strip_username_regexp is defined %}
+strip_username_regexp = "{{ auth.strip_username_regexp }}"
+{% endif %}
+
+{% if auth.backend == 'ldap' or auth.backend == 'msldap' %}
+resource = "{{ auth.resource | mandatory }}"
+{% if auth.user_class is defined %}
+user_class = "{{ auth.user_class }}"
+{% endif %}
+{% if auth.user_name_attribute is defined %}
+user_name_attribute = "{{ auth.user_name_attribute }}"
+{% endif %}
+{% if auth.filter is defined %}
+filter = "{{ auth.filter }}"
+{% endif %}
+{% endif %}
+
+{% if auth.backend == 'db' %}
+resource = "{{ auth.resource | mandatory }}"
+{% endif %}
+
+{%- endfor %}

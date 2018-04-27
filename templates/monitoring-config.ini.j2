@@ -1,0 +1,6 @@
+; {{ ansible_managed }}
+
+[security]
+{% if icingaweb2_monitoring_protected_vars is defined %}
+protected_customvars = "{{ icingaweb2_monitoring_protected_vars | join(',') }}"
+{% endif %}

@@ -1,0 +1,62 @@
+---
+- name: Create configuration directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: "{{ icingaweb2_unix_group }}"
+    mode: 0755
+  with_items:
+    - /etc/icingaweb2/enabledModules
+    - /etc/icingaweb2/modules/monitoring
+
+- name: Create configuration files
+  template:
+    src: "{{ item }}.ini.j2"
+    dest: "/etc/icingaweb2/{{ item }}.ini"
+    owner: root
+    group: "{{ icingaweb2_unix_group }}"
+    mode: 0640
+  with_items:
+    - authentication
+    - config
+    - groups
+    - resources
+    - roles
+
+- name: Enable modules
+  file:
+    src: "{{ icingaweb2_module_path.split(':') | first }}/{{ item }}"
+    dest: "/etc/icingaweb2/enabledModules/{{ item }}"
+    state: link
+    owner: root
+    group: "{{ icingaweb2_unix_group }}"
+    force: true # Because otherwise, Ansible won't symlink directories
+  with_items:
+    - "{{ icingaweb2_modules }}"
+    - unicorn
+
+- name: Find modules
+  find:
+    paths: /etc/icingaweb2/enabledModules/
+    file_type: link
+  register: modules
+
+- name: Disable modules
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  when: "item.path | basename not in icingaweb2_modules and item.path | basename != 'unicorn'"
+  with_items: "{{ modules.files }}"
+
+- name: Create monitoring module configuration
+  template:
+    src: "monitoring-{{ item }}.ini.j2"
+    dest: "/etc/icingaweb2/modules/monitoring/{{ item }}.ini"
+    owner: root
+    group: "{{ icinga2_unix_group }}"
+    mode: 0640
+  with_items:
+    - backends
+    - commandtransports
+    - config
