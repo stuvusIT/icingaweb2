@@ -5,7 +5,7 @@ Icinga 2 will not be installed.
 
 ## Requirements
 
-Ubuntu
+Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://github.com/stuvusIT/php-fpm).
 
 ## Role Variables
 
@@ -169,7 +169,7 @@ Each command transport consists of:
          backend: db
          resource: icingaweb_db
 
-     icingaweb2_roles
+     icingaweb2_roles:
        - name: Icinga Administrators
          groups:
            - admins
