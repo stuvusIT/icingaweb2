@@ -31,7 +31,7 @@
 
 - name: Download background image
   get_url:
-    url: http://i.imgur.com/SCfMd.png
+    url: https://i.imgur.com/SCfMd.png
     dest: /usr/share/icingaweb2/modules/unicorn/public/img/unicorn.png
     mode: 0644
     owner: root
