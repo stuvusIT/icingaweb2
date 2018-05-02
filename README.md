@@ -25,7 +25,7 @@ Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://
 | `icingaweb2_log_facility`              | `user`                          | Syslog facility to log under                                                                                |
 | `icingaweb2_theme`                     | `Icinga`                        | Default theme for the Web UI                                                                                |
 | `icingaweb2_theme_disabled`            | `false`                         | Prevent users from changing the theme in the Web UI                                                         |
-| `icingaweb2_default_domain`            | ` `                             | Default domain for login                                                                                    |
+| `icingaweb2_default_domain`            |                                 | Default domain for login                                                                                    |
 | `icingaweb2_resources`                 | `[ ]`                           | List of resource configurations (see below)                                                                 |
 | `icingaweb2_authentications`           | `[ ]`                           | List of authentications (see below)                                                                         |
 | `icingaweb2_roles`                     | `[ ]`                           | List of roles (see below)                                                                                   |
@@ -37,7 +37,7 @@ Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://
 | `icingaweb2_postgres_grant_ido`        | `true`                          | Grant read privileges to the PostgreSQL IDO database                                                        |
 | `icingaweb2_postgres_login_host`       | `localhost`                     | PostgreSQL host to connect to for configuring PostgreSQL                                                    |
 | `icingaweb2_postgres_login_user`       | `localhost`                     | PostgreSQL user to connect to for configuring PostgreSQL                                                    |
-| `icingaweb2_postgres_login_password`   | ` `                             | PostgreSQL password to connect to for configuring PostgreSQL                                                |
+| `icingaweb2_postgres_login_password`   |                                 | PostgreSQL password to connect to for configuring PostgreSQL                                                |
 | `icingaweb2_postgres_user`             | `icingaweb2`                    | PostgreSQL user for Icingaweb 2                                                                             |
 | `icingaweb2_postgres_database`         | `icingaweb2`                    | PostgreSQL database for Icingaweb 2                                                                         |
 | `icingaweb2_postgres_ido_name`         | `icinga2`                       | Name of the IDO database                                                                                    |
@@ -57,17 +57,17 @@ Each resource consists of:
 | `password`    | (:heavy_check_mark:) | (Only for db) Database password to connect with                         |
 | `dbname`      | (:heavy_check_mark:) | (Only for db) Database name to connect to                               |
 | `persistent`  | `false`              | (Only for db) Use persistent connections                                |
-| `charset`     | ` `                  | (Only for db) Charset of the database                                   |
-| `ssl_cert`    | ` `                  | (Only for db mysql) Public SSL certificate to connect with              |
-| `ssl_key`     | ` `                  | (Only for db mysql) Private SSL key to connect with                     |
-| `ssl_ca`      | ` `                  | (Only for db mysql) Path to the CA certificate of the MySQL server      |
-| `ssl_capath`  | ` `                  | (Only for db mysql) Directory that is searched for CA certificate files |
-| `ssl_cipher`  | ` `                  | (Only for db mysql) Ciphers to use for MySQL SSL connection             |
+| `charset`     |                      | (Only for db) Charset of the database                                   |
+| `ssl_cert`    |                      | (Only for db mysql) Public SSL certificate to connect with              |
+| `ssl_key`     |                      | (Only for db mysql) Private SSL key to connect with                     |
+| `ssl_ca`      |                      | (Only for db mysql) Path to the CA certificate of the MySQL server      |
+| `ssl_capath`  |                      | (Only for db mysql) Directory that is searched for CA certificate files |
+| `ssl_cipher`  |                      | (Only for db mysql) Ciphers to use for MySQL SSL connection             |
 | `root_dn`     | (:heavy_check_mark:) | (Only for ldap) Base DN of the LDAP tree                                |
-| `bind_dn`     | ` `                  | (Only for ldap) DN to connect with                                      |
-| `bind_pw`     | ` `                  | (Only for ldap) Password of the DN to connect with                      |
-| `encryption`  | ` `                  | (Only for ldap) Encryption type to use for the connection               |
-| `private_key` | ` `                  | (Only for ssh) Path to the private key to connect with                  |
+| `bind_dn`     |                      | (Only for ldap) DN to connect with                                      |
+| `bind_pw`     |                      | (Only for ldap) Password of the DN to connect with                      |
+| `encryption`  |                      | (Only for ldap) Encryption type to use for the connection               |
+| `private_key` |                      | (Only for ssh) Path to the private key to connect with                  |
 | `filename`    | (:heavy_check_mark:) | (Only for file) Path to the file to read                                |
 | `fields`      | (:heavy_check_mark:) | (Only for file) Field separator in the file                             |
 | `socket`      | (:heavy_check_mark:) | (Only for livestatus) Path of the livestatus socket                     |
@@ -84,8 +84,8 @@ Each role configuration consists of:
 | `permissions`    | `[ ] `             | Permissions to grant to the role                            |
 | `share_users`    | `[ ]`              | Users this role may share dashboards with (none means all)  |
 | `share_groups`   | `[ ]`              | Groups this role may share dashboards with (none means all) |
-| `object_filter`  | ` `                | Filter for the objects this role can see                    |
-| `prop_blacklist` | ` `                | List of attributes this role may not see                    |
+| `object_filter`  |                    | Filter for the objects this role can see                    |
+| `prop_blacklist` |                    | List of attributes this role may not see                    |
 
 ### Authentications
 
@@ -95,12 +95,12 @@ Each authentication consists of:
 |-------------------------|:--------------------:|---------------------------------------------------------------|
 | `name`                  | :heavy_check_mark:   | Name of the authentication                                    |
 | `backend`               | :heavy_check_mark    | Authentication backend to use                                 |
-| `domain`                | ` `                  | Domain of the authentication                                  |
-| `strip_username_regexp` | ` `                  | (Only for external) Regexp to strip the username with         |
+| `domain`                |                      | Domain of the authentication                                  |
+| `strip_username_regexp` |                      | (Only for external) Regexp to strip the username with         |
 | `resource`              | (:heavy_check_mark:) | (Only for db, ldap and msldap) Authentication resource to use |
-| `user_class`            | ` `                  | (Only for ldap and msldap) Object class of users              |
-| `user_name_attribute`   | ` `                  | (Only for ldap and msldap) LDAP attribute for usernames       |
-| `filter`                | ` `                  | (Only for ldap and msldap) LDAP filter                        |
+| `user_class`            |                      | (Only for ldap and msldap) Object class of users              |
+| `user_name_attribute`   |                      | (Only for ldap and msldap) LDAP attribute for usernames       |
+| `filter`                |                      | (Only for ldap and msldap) LDAP filter                        |
 
 ### Groups
 
@@ -110,12 +110,12 @@ Each group configuration consists of:
 |--------------------------|:------------------:|--------------------------------------------------------------------------|
 | `name`                   | :heavy_check_mark: | Name of the group configuration                                          |
 | `resource`               | :heavy_check_mark: | Name of the resource for the group                                       |
-| `user_class`             | ` `                | (Only for ldap and msldap) Object class for users                        |
-| `user_name_attribute`    | ` `                | (Only for ldap and msldap) LDAP attribute for usernames                  |
-| `group_class`            | ` `                | (Only for ldap and msldap) Object class for groups                       |
-| `group_name_attribute`   | ` `                | (Only for ldap and msldap) LDAP attribute for group names                |
-| `group_member_attribute` | ` `                | (Only for ldap and msldap) LDAP attribute for user membership in a group |
-| `group_filter`           | ` `                | (Only for ldap and msldap) LDAP filter for group search                  |
+| `user_class`             |                    | (Only for ldap and msldap) Object class for users                        |
+| `user_name_attribute`    |                    | (Only for ldap and msldap) LDAP attribute for usernames                  |
+| `group_class`            |                    | (Only for ldap and msldap) Object class for groups                       |
+| `group_name_attribute`   |                    | (Only for ldap and msldap) LDAP attribute for group names                |
+| `group_member_attribute` |                    | (Only for ldap and msldap) LDAP attribute for user membership in a group |
+| `group_filter`           |                    | (Only for ldap and msldap) LDAP filter for group search                  |
 | `nested_group_search`    | `false`            | (Only for ldap and msldap) Also try to query nested groups               |
 
 ### Monitoring backends
