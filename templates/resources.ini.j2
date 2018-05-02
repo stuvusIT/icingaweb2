@@ -1,0 +1,64 @@
+; {{ ansible_managed }}
+
+{% for res in icingaweb2_resources %}
+[{{ res.name }}]
+type = "{{ res.type }}"
+
+{% if res.type == 'db' %}
+db = "{{ res.db | mandatory }}"
+host = "{{ res.host | mandatory }}"
+port = "{{ res.port | mandatory }}"
+username = "{{ res.username | mandatory }}"
+password = "{{ res.password | mandatory }}"
+dbname = "{{ res.dbname | mandatory }}"
+persistent = "{{ res.persistent | default(false) | int }}"
+{% if res.charset is defined %}
+charset = "{{ res.charset }}"
+{% endif %}
+{% if res.db == 'mysql' %}
+{% if res.ssl_cert is defined %}
+ssl_cert = "{{ res.ssl_cert }}"
+{% endif %}
+{% if res.ssl_key is defined %}
+ssl_key = "{{ res.ssl_key }}"
+{% endif %}
+{% if res.ssl_ca is defined %}
+ssl_ca = "{{ res.ssl_ca }}"
+{% endif %}
+{% if res.ssl_capath is defined %}
+ssl_capath = "{{ res.ssl_capath }}"
+{% endif %}
+{% if res.ssl_cipher is defined %}
+ssl_cipher = "{{ res.ssl_cipher }}"
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if res.type == 'ldap' %}
+hostname = "{{ res.host | mandatory }}"
+port = "{{ res.port | mandatory }}"
+root_dn = "{{ res.root_dn | mandatory }}"
+{% if res.bind_dn is defined %}
+bind_dn = "{{ res.bind_dn | mandatory }}"
+{% endif %}
+{% if res.bind_pw is defined %}
+bind_pw = "{{ res.bind_pw | mandatory }}"
+{% endif %}
+encryption = "{{ res.encryption | default('none') }}"
+{% endif %}
+
+{% if res.type == 'ssh' %}
+user = "{{ res.username | mandatory }}"
+private_key = "{{ res.private_key | mandatory }}"
+{% endif %}
+
+{% if res.type == 'file' %}
+filename = "{{ res.filename | mandatory }}"
+fields = "{{ res.fields | mandatory }}"
+{% endif %}
+
+{% if res.type == 'livestatus' %}
+socket = "{{ res.socket | mandatory }}"
+{% endif %}
+
+{% endfor %}

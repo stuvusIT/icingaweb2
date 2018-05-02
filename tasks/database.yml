@@ -1,0 +1,43 @@
+---
+- name: Create database user
+  postgresql_user:
+    name: "{{ icingaweb2_postgres_user }}"
+    role_attr_flags: LOGIN
+    # Connection to postgres
+    login_host: "{{ icingaweb2_postgres_login_host }}"
+    login_user: "{{ icingaweb2_postgres_login_user }}"
+    login_password: "{{ icingaweb2_postgres_login_password | default(omit) }}"
+
+- name: Create database
+  postgresql_db:
+    name: "{{ icingaweb2_postgres_database }}"
+    owner: "{{ icingaweb2_postgres_user }}"
+    state: restore
+    target: /usr/share/icingaweb2/etc/schema/pgsql.schema.sql
+    # Connection to postgres
+    login_host: "{{ icingaweb2_postgres_login_host }}"
+    login_user: "{{ icingaweb2_postgres_login_user }}"
+    login_password: "{{ icingaweb2_postgres_login_password | default(omit) }}"
+
+- name: Grant all privileges on database
+  postgresql_privs:
+    database: "{{ icingaweb2_postgres_database }}"
+    roles: "{{ icingaweb2_postgres_user }}"
+    priv: ALL
+    type: database
+    # Connection to postgres
+    host: "{{ icingaweb2_postgres_login_host }}"
+    login: "{{ icingaweb2_postgres_login_user }}"
+    password: "{{ icingaweb2_postgres_login_password | default(omit) }}"
+
+- name: Grant permissions to IDO
+  postgresql_privs:
+    database: "{{ icingaweb2_postgres_ido_name }}"
+    roles: "{{ icingaweb2_postgres_user }}"
+    priv: SELECT
+    objs: ALL_IN_SCHEMA
+    # Connection to postgres
+    host: "{{ icingaweb2_postgres_login_host }}"
+    login: "{{ icingaweb2_postgres_login_user }}"
+    password: "{{ icingaweb2_postgres_login_password | default(omit) }}"
+  when: icingaweb2_postgres_grant_ido

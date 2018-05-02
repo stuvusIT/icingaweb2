@@ -1,0 +1,13 @@
+; {{ ansible_managed }}
+
+{% for transport in icingaweb2_monitoring_transports %}
+[{{ transport.name }}]
+transport = "{{ transport.transport | default('local') }}"
+path = "{{ transport.path | mandatory }}"
+{% if transport.transport | default('local') == 'remote' %}
+host = "{{ transport.host | mandatory }}"
+port = "{{ transport.port | default('22') }}"
+user = "{{ transport.user | mandatory }}"
+{% endif %}
+
+{% endfor %}

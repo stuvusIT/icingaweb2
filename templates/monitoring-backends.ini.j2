@@ -1,0 +1,9 @@
+; {{ ansible_managed }}
+
+{% for backend in icingaweb2_monitoring_backends %}
+[{{ backend.name }}]
+type = "ido"
+resource = "{{ backend.resource | mandatory }}"
+disabled = "{{ backend.disabled | default(false) | int }}"
+
+{% endfor %}
