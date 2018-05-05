@@ -3,7 +3,7 @@
 {% for backend in icingaweb2_monitoring_backends %}
 [{{ backend.name }}]
 type = "ido"
-resource = "{{ backend.resource | mandatory }}"
+resource = "{{ backend.resource }}"
 disabled = "{{ backend.disabled | default(false) | int }}"
 
 {% endfor %}

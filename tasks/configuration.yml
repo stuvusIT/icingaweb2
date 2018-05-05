@@ -7,7 +7,9 @@
     group: "{{ icingaweb2_unix_group }}"
     mode: 0755
   with_items:
+    - /etc/icingaweb2
     - /etc/icingaweb2/enabledModules
+    - /etc/icingaweb2/modules
     - /etc/icingaweb2/modules/monitoring
 
 - name: Create configuration files
@@ -54,7 +56,7 @@
     src: "monitoring-{{ item }}.ini.j2"
     dest: "/etc/icingaweb2/modules/monitoring/{{ item }}.ini"
     owner: root
-    group: "{{ icinga2_unix_group }}"
+    group: "{{ icingaweb2_unix_group }}"
     mode: 0640
   with_items:
     - backends

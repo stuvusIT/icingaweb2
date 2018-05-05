@@ -4,7 +4,7 @@
 show_stacktraces = "{{ icingaweb2_show_stacktraces | int }}"
 config_backend = "{{ icingaweb2_config_backend }}"
 {% if icingaweb2_config_backend == 'db' %}
-config_resource = "{{ icingaweb2_config_resource | mandatory }}"
+config_resource = "{{ icingaweb2_config_resource }}"
 {% endif %}
 module_path = "{{ icingaweb2_module_path }}"
 
@@ -12,7 +12,7 @@ module_path = "{{ icingaweb2_module_path }}"
 log = "{{ icingaweb2_log }}"
 level = "{{ icingaweb2_log_level }}"
 {% if icingaweb2_log == 'file' %}
-file = "{{ icingaweb2_log_file | mandatory }}"
+file = "{{ icingaweb2_log_file }}"
 {% endif %}
 application = "{{ icingaweb2_log_application }}"
 facility = "{{ icingaweb2_log_facility }}"
