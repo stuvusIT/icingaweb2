@@ -5,12 +5,12 @@
 type = "{{ res.type }}"
 
 {% if res.type == 'db' %}
-db = "{{ res.db | mandatory }}"
-host = "{{ res.host | mandatory }}"
-port = "{{ res.port | mandatory }}"
-username = "{{ res.username | mandatory }}"
-password = "{{ res.password | mandatory }}"
-dbname = "{{ res.dbname | mandatory }}"
+db = "{{ res.db }}"
+host = "{{ res.host }}"
+port = "{{ res.port }}"
+username = "{{ res.username }}"
+password = "{{ res.password }}"
+dbname = "{{ res.dbname }}"
 persistent = "{{ res.persistent | default(false) | int }}"
 {% if res.charset is defined %}
 charset = "{{ res.charset }}"
@@ -35,30 +35,30 @@ ssl_cipher = "{{ res.ssl_cipher }}"
 {% endif %}
 
 {% if res.type == 'ldap' %}
-hostname = "{{ res.host | mandatory }}"
-port = "{{ res.port | mandatory }}"
-root_dn = "{{ res.root_dn | mandatory }}"
+hostname = "{{ res.host }}"
+port = "{{ res.port }}"
+root_dn = "{{ res.root_dn }}"
 {% if res.bind_dn is defined %}
-bind_dn = "{{ res.bind_dn | mandatory }}"
+bind_dn = "{{ res.bind_dn }}"
 {% endif %}
 {% if res.bind_pw is defined %}
-bind_pw = "{{ res.bind_pw | mandatory }}"
+bind_pw = "{{ res.bind_pw }}"
 {% endif %}
 encryption = "{{ res.encryption | default('none') }}"
 {% endif %}
 
 {% if res.type == 'ssh' %}
-user = "{{ res.username | mandatory }}"
-private_key = "{{ res.private_key | mandatory }}"
+user = "{{ res.username }}"
+private_key = "{{ res.private_key }}"
 {% endif %}
 
 {% if res.type == 'file' %}
-filename = "{{ res.filename | mandatory }}"
-fields = "{{ res.fields | mandatory }}"
+filename = "{{ res.filename }}"
+fields = "{{ res.fields }}"
 {% endif %}
 
 {% if res.type == 'livestatus' %}
-socket = "{{ res.socket | mandatory }}"
+socket = "{{ res.socket }}"
 {% endif %}
 
 {% endfor %}

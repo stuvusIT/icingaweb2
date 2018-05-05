@@ -12,7 +12,7 @@ strip_username_regexp = "{{ auth.strip_username_regexp }}"
 {% endif %}
 
 {% if auth.backend == 'ldap' or auth.backend == 'msldap' %}
-resource = "{{ auth.resource | mandatory }}"
+resource = "{{ auth.resource }}"
 {% if auth.user_class is defined %}
 user_class = "{{ auth.user_class }}"
 {% endif %}
@@ -25,7 +25,7 @@ filter = "{{ auth.filter }}"
 {% endif %}
 
 {% if auth.backend == 'db' %}
-resource = "{{ auth.resource | mandatory }}"
+resource = "{{ auth.resource }}"
 {% endif %}
 
 {%- endfor %}
