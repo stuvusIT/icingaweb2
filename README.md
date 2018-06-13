@@ -5,7 +5,7 @@ Icinga 2 will not be installed.
 
 ## Requirements
 
-Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://github.com/stuvusIT/php-fpm).
+Debian or Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://github.com/stuvusIT/php-fpm).
 
 ## Role Variables
 
