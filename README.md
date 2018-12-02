@@ -14,6 +14,7 @@ Debian or Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP
 | `icingaweb2_unix_group`                | `www-data`                      | Unix group under which your webserver and PHP run (used for file ownership)                                 |
 | `icingaweb2_module_path`               | `/usr/share/icingaweb2/modules` | Search path for Icingaweb 2 modules                                                                         |
 | `icingaweb2_modules`                   | `[ doc, monitoring ]`           | Icingaweb 2 modules to enable                                                                               |
+| `icingaweb2_modules_to_clone`          | `{}`                            | Name-URL dict of modules to clone and automatically enable                                                  |
 | `icingaweb2_show_stacktraces`          | `false`                         | Show stacktraces in the UI                                                                                  |
 | `icingaweb2_config_backend`            | `ini`                           | Backend to use for user configurations                                                                      |
 | `icingaweb2_config_resource`           | (:heavy_check_mark:)            | (Only for db config backend) Database resource to use for user configurations                               |
@@ -142,7 +143,7 @@ Each command transport consists of:
 ## Example Playbook
 
 ```yml
-- hosts: awx
+- hosts: icinga
   roles:
   - icingaweb2
      icingaweb2_resources:
@@ -183,6 +184,9 @@ Each command transport consists of:
      icingaweb2_monitoring_transports:
        - name: localpipe
          path: /var/run/icinga2/cmd/icinga2.cmd
+
+     icingaweb2_modules_to_clone:
+       spring: https://github.com/Mikesch-mp/icingaweb2-theme-spring
 ```
 
 ## License
