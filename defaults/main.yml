@@ -7,6 +7,7 @@ icingaweb2_modules:
 icingaweb2_show_stacktraces: false
 icingaweb2_config_backend: ini
 icingaweb2_module_path: /usr/share/icingaweb2/modules
+icingaweb2_modules_to_clone: {}
 icingaweb2_log: syslog
 icingaweb2_log_level: WARNING
 icingaweb2_log_application: icingaweb2

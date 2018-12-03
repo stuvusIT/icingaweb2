@@ -36,7 +36,7 @@
     force: true # Because otherwise, Ansible won't symlink directories
   with_items:
     - "{{ icingaweb2_modules }}"
-    - unicorn
+    - "{{ icingaweb2_modules_to_clone | combine(default_modules_to_clone) | list }}"
 
 - name: Find modules
   find:
@@ -48,7 +48,7 @@
   file:
     path: "{{ item.path }}"
     state: absent
-  when: "item.path | basename not in icingaweb2_modules and item.path | basename != 'unicorn'"
+  when: "item.path | basename not in (icingaweb2_modules + icingaweb2_modules_to_clone | combine(default_modules_to_clone) | list)"
   with_items: "{{ modules.files }}"
 
 - name: Create monitoring module configuration

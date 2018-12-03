@@ -23,10 +23,13 @@
       - php-xml
       - php-mbstring
 
-- name: Clone theme
+- name: Clone modules
   git:
-    repo: https://github.com/Mikesch-mp/icingaweb2-theme-unicorn
-    dest: /usr/share/icingaweb2/modules/unicorn
+    repo: "{{ item.value }}"
+    dest: "/usr/share/icingaweb2/modules/{{ item.key }}"
+    force: true
+    depth: 1
+  loop: "{{ icingaweb2_modules_to_clone | combine(default_modules_to_clone) | dict2items }}"
 
 - name: Download background image
   get_url:

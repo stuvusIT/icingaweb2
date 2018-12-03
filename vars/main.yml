@@ -1,0 +1,3 @@
+---
+default_modules_to_clone:
+  unicorn: https://github.com/Mikesch-mp/icingaweb2-theme-unicorn
