@@ -11,18 +11,17 @@
 
 - name: Install required packages
   apt:
-    name: "{{ item }}"
-  with_items:
-    - python-psycopg2
-    - git
-    - icingaweb2
-    - icingaweb2-module-monitoring
-    - icingaweb2-module-doc
-    - php-pgsql
-    - php-imagick
-    - php-intl
-    - php-xml
-    - php-mbstring
+    name:
+      - python-psycopg2
+      - git
+      - icingaweb2
+      - icingaweb2-module-monitoring
+      - icingaweb2-module-doc
+      - php-pgsql
+      - php-imagick
+      - php-intl
+      - php-xml
+      - php-mbstring
 
 - name: Clone theme
   git:
