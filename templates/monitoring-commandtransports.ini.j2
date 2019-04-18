@@ -3,11 +3,19 @@
 {% for transport in icingaweb2_monitoring_transports %}
 [{{ transport.name }}]
 transport = "{{ transport.transport | default('local') }}"
+{% if transport.transport | default('local') != 'api' %}
 path = "{{ transport.path }}"
+{% endif %}
 {% if transport.transport | default('local') == 'remote' %}
 host = "{{ transport.host }}"
 port = "{{ transport.port | default('22') }}"
 user = "{{ transport.user }}"
+{% endif %}
+{% if transport.transport | default('local') == 'api' %}
+host = "{{ transport.host }}"
+port = "{{ transport.port | default('5665') }}"
+username = "{{ transport.user }}"
+password = "{{ transport.password }}"
 {% endif %}
 
 {% endfor %}
