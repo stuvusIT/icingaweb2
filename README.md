@@ -6,6 +6,7 @@ Icinga 2 will not be installed.
 ## Requirements
 
 Debian or Ubuntu with a [web server](https://github.com/stuvusIT/nginx) and [PHP](https://github.com/stuvusIT/php-fpm).
+PHP needs to enable the `intl` and `curl` modules and set the timezone in php.ini.
 
 ## Role Variables
 
@@ -132,13 +133,15 @@ Each monitoring backend consists of:
 
 Each command transport consists of:
 
-| Name        | Default/Required     | Description                                |
-|-------------|:--------------------:|--------------------------------------------|
-| `transport` | `local`              | Type of this transport                     |
-| `path`      | :heavy_check_mark:   | Path to the command socket                 |
-| `host`      | (:heavy_check_mark:) | (Only for remote) SSH host to connect to   |
-| `port`      | `22`                 | (Only for remote) SSH port to connect to   |
-| `user`      | (:heavy_check_mark:) | (Only for remote) Username to connect with |
+| Name        | Default/Required          | Description                                        |
+|-------------|:-------------------------:|----------------------------------------------------|
+| `name`      | :heavy_check_mark:        | Name of this transport                             |
+| `transport` | `local`                   | Type of this transport (local, remote, or api)     |
+| `path`      | :heavy_check_mark:        | Path to the command socket                         |
+| `host`      | (:heavy_check_mark:)      | (Only for remote and api) Host to connect to       |
+| `port`      | remote: `22`; api: `5665` | (Only for remote and api) Port to connect to       |
+| `user`      | (:heavy_check_mark:)      | (Only for remote and api) Username to connect with |
+| `password`  | (:heavy_check_mark:)      | (Only for api) Password to connect with            |
 
 ## Example Playbook
 

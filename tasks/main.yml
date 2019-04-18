@@ -17,11 +17,12 @@
       - icingaweb2
       - icingaweb2-module-monitoring
       - icingaweb2-module-doc
-      - php-pgsql
+      - php-curl
       - php-imagick
       - php-intl
-      - php-xml
       - php-mbstring
+      - php-pgsql
+      - php-xml
 
 - name: Clone modules
   git:
